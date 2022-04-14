@@ -8,6 +8,9 @@ In the working principle of this code, the prompt of the device is detected firs
 
 ![image](https://user-images.githubusercontent.com/96883175/163341786-7b51a443-7769-4737-8651-23e0cb63a2c6.png)
 
-Finally, the Therading feature can be configured to 200(replaceable) devices at the same time.
+Therading feature can be configured to 200(replaceable) devices at the same time. 
 
 ![image](https://user-images.githubusercontent.com/96883175/163341877-02e69b3c-d019-4d10-8c60-b925ee519c2b.png)
+
+Finally, We query the relevant IP to check that the entered configuration is on the device.
+
