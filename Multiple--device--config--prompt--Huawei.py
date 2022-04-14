@@ -1,11 +1,13 @@
+import json
 from netmiko import Netmiko
 from multiprocessing.dummy import Pool as ThreadPool
 import time
+import ttp
 
 f_2 = open("multiple_device_list_huawei.txt","r")
 multiple_device_list = f_2.readlines()
 
-f_3 = open("Syslog_Basarisiz_baglanti.txt","w")
+f_3 = open("Syslog_Basarisiz_baglanti.txt","a")
 
 with open("user_pass.txt", "r") as f5:
     user_pass = f5.readlines()
@@ -38,12 +40,23 @@ def _ssh_(nodeip):
     print("entered config mode")
     huawei_connect.send_command_timing("info-center loghost 10.222.246.12")
     huawei_connect.send_command_timing("quit")
+
+    data_to_parse = huawei_connect.send_command_timing('display current-configuration | inc 10.222.246.12')
+    output = ''.join(data_to_parse)
+    output2 = output.splitlines()
+    output3 = ''.join(output2)
+    output4 = output3.split(" ")
+    if "10.222.246.12" in output4:
+        print("config done")
+        file1.write(nodeip + "\n")
+    else:
+        print(nodeip + "config:nok")
+
     huawei_connect.send_command_timing("save")
     huawei_connect.send_command_timing("yes")
-    print("config done")
-    file1.write(nodeip + "\n")
     huawei_connect.disconnect()
 
-
 myPool = ThreadPool(200)
-result = myPool.map(_ssh_,multiple_device_list)
+result1 = myPool.map(_ssh_,multiple_device_list)
+
+
