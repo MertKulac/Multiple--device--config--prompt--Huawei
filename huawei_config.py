@@ -38,10 +38,10 @@ def _ssh_(nodeip):
     print(hostname_fnk)
     huawei_connect.send_command_timing("sys")
     print("entered config mode")
-    huawei_connect.send_command_timing("info-center loghost 10.222.246.12")
+    huawei_connect.send_command_timing("info-center loghost 192.168.0.X")
     huawei_connect.send_command_timing("quit")
 
-    data_to_parse = huawei_connect.send_command_timing('display current-configuration | inc 10.222.246.12')
+    data_to_parse = huawei_connect.send_command_timing('display current-configuration | inc 192.168.0.X')
     output = ''.join(data_to_parse)
     output2 = output.splitlines()
     output3 = ''.join(output2)
